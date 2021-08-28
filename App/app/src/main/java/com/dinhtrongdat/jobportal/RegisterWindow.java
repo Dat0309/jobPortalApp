@@ -2,6 +2,7 @@ package com.dinhtrongdat.jobportal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -43,8 +44,8 @@ public class RegisterWindow extends AppCompatActivity {
 
                         UserHelperClass helperClass = new UserHelperClass(_user, _pass, _phone);
 
-                        reference.setValue(helperClass);
-
+                        reference.push().setValue(helperClass);
+                        startActivity(new Intent(RegisterWindow.this, LoginActivity.class));
                     }
 
             });

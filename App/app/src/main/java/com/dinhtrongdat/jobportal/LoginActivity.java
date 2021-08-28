@@ -1,5 +1,6 @@
 package com.dinhtrongdat.jobportal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
@@ -12,9 +13,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,8 +41,10 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainWindow.class);
-                startActivity(intent);
+                if(!validationUser() | !validationPass()){
+                    return;
+                }
+                    isUser();
             }
         });
 
@@ -56,6 +66,136 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private Boolean validationUser(){
+        String val = edtUser.getEditText().getText().toString();
+        String space = "\\A\\w{4,20}\\z";
+
+        if(val.isEmpty()){
+            edtUser.setError("Nhập tài khoản");
+            return false;
+        }
+        else if(val.length()>=15){
+            edtUser.setError("không được quá 15 ký tự");
+            return false;
+        }
+        else if(!val.matches(space)){
+            edtUser.setError("Không được chứa khoảng trắng");
+            return false;
+        }
+        else{
+            edtUser.setError(null);
+            return true;
+        }
+    }
+
+    private Boolean validationPass(){
+        String val = edtPass.getEditText().getText().toString();
+        String space = "\\A\\w{4,20}\\z";
+
+        if(val.isEmpty()){
+            edtPass.setError("Nhập mật khẩu");
+            return false;
+        }
+        else if(val.length()>=15){
+            edtPass.setError("không được quá 15 ký tự");
+            return false;
+        }
+        else if(!val.matches(space)){
+            edtPass.setError("Không được chứa khoảng trắng");
+            return false;
+        }
+        else{
+            edtPass.setError(null);
+            return true;
+        }
+    }
+
+    private void isUser() {
+        final String userName = edtUser.getEditText().getText().toString().trim();
+        final String passWord = edtPass.getEditText().getText().toString().trim();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String USER = dataSnapshot.child("user").getValue(String.class);
+                String PASS = dataSnapshot.child("pass").getValue(String.class);
+                String PHONE = dataSnapshot.child("phone").getValue(String.class);
+//                Toast.makeText(LoginActivity.this, USER + PASS + "",Toast.LENGTH_LONG).show();
+
+                if (userName.compareTo(USER)==0){
+                    if(passWord.compareTo(PASS)==0){
+                        Intent intent = new Intent(getApplicationContext(), MainWindow.class);
+                        intent.putExtra("user", USER);
+                        intent.putExtra("pass",PASS);
+                        intent.putExtra("phone",PHONE);
+
+                        startActivity(intent);
+                    }
+                    else{
+                        edtPass.setError("Sai mật khẩu");
+                        edtPass.requestFocus();
+                    }
+                }
+                else{
+                    edtUser.setError("Tài khoản không tồn tại");
+                    edtPass.requestFocus();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(LoginActivity.this, "Đăng nhập thất bại",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+//        Query checkUser = reference.orderByChild("user").equalTo(userName);
+//
+//        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                if(snapshot.exists()){
+//
+//                    edtUser.setError(null);
+//                    edtUser.setErrorEnabled(false);
+//
+//                    String passwordFromDB = snapshot.child(userName).child("pass").getValue(String.class);
+//
+//                    if(passwordFromDB.equals(passWord)){
+//
+//                        edtUser.setError(null);
+//                        edtUser.setErrorEnabled(false);
+//
+//                        String usernameFromDB = snapshot.child(userName).child("user").getValue(String.class);
+//                        String phoneFromDB = snapshot.child(userName).child("phone").getValue(String.class);
+//
+//                        Intent intent = new Intent(getApplicationContext(), MainWindow.class);
+//
+//                        intent.putExtra("user", usernameFromDB);
+//                        intent.putExtra("pass",passwordFromDB);
+//                        intent.putExtra("phone",phoneFromDB);
+//
+//                        startActivity(intent);
+//                    }
+//                    else{
+//                        edtPass.setError("Sai mật khẩu");
+//                        edtPass.requestFocus();
+//                    }
+//                }
+//                else{
+//                    edtUser.setError("Tài khoản không tồn tại");
+//                    edtUser.requestFocus();
+//                }
+//            }
+
 
     private void AnhXa(){
         btnLogin = (Button) findViewById(R.id.btnLogin);
