@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "278095846980",
+    "project_id": "job-portal-5318e",
+    "storage_bucket": "job-portal-5318e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278095846980:android:b396488127db8eb3482611",
+        "android_client_info": {
+          "package_name": "com.dinhtrongdat.jobportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278095846980-444rouuvjp0ujnedeg5p9qqpdsscmoce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXvXS55VvRfa2gBwDXKg0_80hZBEmX6n8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278095846980-444rouuvjp0ujnedeg5p9qqpdsscmoce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

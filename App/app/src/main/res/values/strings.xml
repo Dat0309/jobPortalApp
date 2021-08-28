@@ -10,4 +10,10 @@
     <string name="login">Đăng nhập</string>
     <string name="signup">Đăng ký</string>
     <string name="or">hoặc</string>
+    <string name="singup_title">Welcome</string>
+    <string name="singup_slogan">Đăng ký để bắt đầu cuộc hành trình</string>
+    <string name="pass_repeat">Xác nhận mật khẩu</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="ho">Họ</string>
+    <string name="ten">Tên</string>
 </resources>

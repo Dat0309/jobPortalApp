@@ -4,36 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".RegisterWindow"
     android:orientation="vertical"
-    android:background="@color/white"
     android:padding="20dp">
 
     <ImageView
-        android:layout_gravity="center"
-        android:id="@+id/logoImg"
+        android:id="@+id/logoImgSignUp"
         android:layout_width="150dp"
         android:layout_height="100dp"
+        android:layout_gravity="center"
         android:src="@drawable/logo"
-        android:transitionName="logo_image"/>
+        android:transitionName="logo_image" />
 
     <TextView
-        android:id="@+id/txtWelcome"
-        android:textSize="50sp"
-        android:fontFamily="@font/bangers"
-        android:text="@string/welcome"
+        android:id="@+id/txtWelcomeSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/bangers"
+        android:text="@string/singup_title"
         android:textAlignment="center"
         android:textColor="#1B1A1A"
-        android:transitionName="logo_text"/>
+        android:textSize="50sp"
+        android:transitionName="logo_text" />
 
     <TextView
-        android:id="@+id/txtSignin"
+        android:id="@+id/txtSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/antic"
-        android:text="@string/signin"
+        android:text="@string/singup_slogan"
         android:textAlignment="center"
         android:textSize="20sp"
         android:transitionName="slogan_tran"/>
@@ -48,7 +47,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/username"
+            android:id="@+id/username_signup"
             android:transitionName="user_tran"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -63,7 +62,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/password"
+            android:id="@+id/password_signup"
             app:passwordToggleEnabled="true"
             android:transitionName="pass_tran"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -77,47 +76,33 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnFogotPass"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="@string/forgotpass"
-            android:layout_gravity="right"
-            android:elevation="0dp"
-            android:fontFamily="@font/antic"
-            android:layout_marginBottom="5dp"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogin"
-            android:textColor="@color/white"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/custom_btn_login"
-            android:fontFamily="@font/antic"
-            android:transitionName="btn_tran"/>
+            android:id="@+id/phone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <TextView
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/antic"
-            android:text="@string/or"
-            android:textAlignment="center"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/signup"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/custom_btn_login"
             android:textColor="@color/white"
             android:fontFamily="@font/antic"
-            android:transitionName="btn_tran"/>
+            android:transitionName="btn_tran"
+            />
+
 
     </LinearLayout>
 </LinearLayout>
