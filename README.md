@@ -1,2 +1,2 @@
 # job-portal-app
-Mình làm ứng dụng tìm kiếm việc làm trên điện thoại android.
+Mình làm ứng dụng tìm kiếm việc làm trên điện thoại android để học FireBase
