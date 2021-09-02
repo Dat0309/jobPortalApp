@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(!validationUser() | !validationPass()){
                     return;
                 }
-                    isUser();
+                    User();
             }
         });
 
@@ -151,6 +151,54 @@ public class LoginActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Toast.makeText(LoginActivity.this, "Đăng nhập thất bại",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void User(){
+        final String userName = edtUser.getEditText().getText().toString().trim();
+        final String passWord = edtPass.getEditText().getText().toString().trim();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+
+                Iterable<DataSnapshot> nodeChild = dataSnapshot.getChildren();
+                for(DataSnapshot data1 :nodeChild){
+                    UserHelperClass user = data1.getValue(UserHelperClass.class);
+                    String USER = user.getUser();
+                    String PASS = user.getPass();
+                    String PHONE = user.getPhone();
+
+                    if (userName.compareTo(USER)==0){
+                        if(passWord.compareTo(PASS)==0){
+                            Intent intent = new Intent(getApplicationContext(), MainWindow.class);
+                            intent.putExtra("user", USER);
+                            intent.putExtra("pass",PASS);
+                            intent.putExtra("phone",PHONE);
+
+                            startActivity(intent);
+                        }
+                        else{
+                            edtPass.setError("Sai mật khẩu");
+                            edtPass.requestFocus();
+                        }
+                    }
+                    else{
+                        edtUser.setError("Tài khoản không tồn tại");
+                        edtPass.requestFocus();
+                    }
+//                    Toast.makeText(LoginActivity.this,user.getUser().toString() +"",Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(LoginActivity.this,"failt",Toast.LENGTH_LONG).show();
             }
         });
     }
