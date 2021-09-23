@@ -45,7 +45,7 @@ public class RegisterWindow extends AppCompatActivity {
                         UserHelperClass helperClass = new UserHelperClass(_user, _pass, _phone);
 
                         reference.push().setValue(helperClass);
-                        startActivity(new Intent(RegisterWindow.this, LoginActivity.class));
+                        startActivity(new Intent(RegisterWindow.this, com.dinhtrongdat.jobportal.LoginActivity.class));
                     }
 
             });
